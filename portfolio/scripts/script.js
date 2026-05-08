@@ -1,13 +1,13 @@
-const NOME = "Josué Felipe";
+'use strict';
+const botao = document.getElementById("modo claro");
+const NOME = ("Josué Felipe");
 let tituloProfissional = "HTML Profissional";
 let minhaBio = "Sou um aluno de DS pronto para aprender a cada dia";
-
-
 
 let indefinido;
 let nulo = null;
 let curso = {
-    nome: "Desenvolvimento de Sistemas",
+    nome: "Desenvolvimento de Sistemas",    
         semestre: 3,
             disciplinaAtual: "Linguagem de Programação"
             };
@@ -20,30 +20,15 @@ let anoIngresso = 2025;
 let mesIngresso = 1;
 let diaIngresso = 1;
 
-
-
 let hoje = new Date(); //dia atual
 let mesAtual = hoje.getMonth() + 1; // mes atual (0-11 por isso o +1)
 let anoAtual = hoje.getFullYear(); //ano atual
 let diaAtual = hoje.getDate();  //dia atual
 
-
-
-
 let numeroMesFormatura = 12;
 let anos = anoFormatura - anoAtual;
 let meses = mesFormatura - mesAtual;
 let dias = diaFormatura - diaAtual;
-
-
-
-
-
-
-
-
-
-
 
 
 if (meses <= 0 && dias <= 0 && anos <= 0) {
@@ -57,14 +42,11 @@ if (anoFormatura - anoAtual <= 0) {
     document.getElementById("tempoRestante").innerText = `Tempo restante: ${anoFormatura - anoAtual} anos`;
 }
 
-
-
 document.getElementById("meuNome").innerText = NOME;
 document.getElementById("tituloProfissional").innerText = tituloProfissional;
 document.getElementById("minhaBio").innerText = minhaBio;
 document.getElementById("anoFormatura").innerText = "Ano de formatura: " + anoFormatura;
 document.write(`<p> Ano de Ingresso: ${anoIngresso}</p>`);
-
 
 let diaSemana = hoje.getDay() + 1;
 
@@ -81,7 +63,6 @@ switch (diaSemana) {
     default: diaescrito = "Dia inválido"; 
 
 }
-
 
 document.write(`<p> Hoje é ${diaescrito} </p>`);
 
@@ -115,7 +96,6 @@ btnLogica.addEventListener("click", function() {
   resultadoQuiz.style.marginTop        = "10px";
 });
 
-
 let pontosFront  = 0;
 let pontosBack   = 0;
 
@@ -135,11 +115,23 @@ function exibirPerfil() {
   } else if (pontosBack > pontosFront) {
     resultadoQuiz.textContent = "⚙️ Perfil Back-End!";
   } else {
-    resultadoQuiz.textContent = "🔄 Perfil Full Stack — você é dos dois!";
+    resultadoQuiz.textContent = "Os dois né";
   }
 }
 
-for (let i = 0; i <= 20; i++) {
+/*for (let i = 0; i <= 20; i++) {
     let pares = ( i % 2 ===0) ? "par" : "impar";
     console.log (`${i} - ${pares}`)
+}*/
+
+let habilidades = ["HTML", "CSS", "JavaScript", "Python" ];
+
+for (let habilidade of habilidades) {
+    
+    if (habilidade === "JavaScript" || habilidade === "Python" || habilidade === "HTML" || habilidade === "CSS") {
+        document.write(`<p>${habilidade} ;  Hard skills </p>`);
+     else (document.write(`<p>${habilidade} ;  Soft skills </p>`));
+    
 }
+
+    

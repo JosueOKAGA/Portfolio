@@ -1,137 +1,163 @@
 'use strict';
-const botao = document.getElementById("modo claro");
-const NOME = ("Josué Felipe");
-let tituloProfissional = "HTML Profissional";
+
+// BOTÃO
+const botao = document.getElementById("modoClaroEscuro");
+
+// DADOS PESSOAIS
+const nome = "Josué Felipe";
+let tituloProfissional = "Desenvolvedor de Sistemas";
 let minhaBio = "Sou um aluno de DS pronto para aprender a cada dia";
 
-let indefinido;
-let nulo = null;
-let curso = {
-    nome: "Desenvolvimento de Sistemas",    
-        semestre: 3,
-            disciplinaAtual: "Linguagem de Programação"
-            };
-
+// DATAS
 let anoFormatura = 2026;
 let mesFormatura = 12;
 let diaFormatura = 31;
 
-let anoIngresso = 2025;
-let mesIngresso = 1;
-let diaIngresso = 1;
+let hoje = new Date();
 
-let hoje = new Date(); //dia atual
-let mesAtual = hoje.getMonth() + 1; // mes atual (0-11 por isso o +1)
-let anoAtual = hoje.getFullYear(); //ano atual
-let diaAtual = hoje.getDate();  //dia atual
+let anoAtual = hoje.getFullYear();
+let mesAtual = hoje.getMonth() + 1;
+let diaAtual = hoje.getDate();
 
-let numeroMesFormatura = 12;
+// CÁLCULO DE TEMPO
 let anos = anoFormatura - anoAtual;
 let meses = mesFormatura - mesAtual;
 let dias = diaFormatura - diaAtual;
 
-
-if (meses <= 0 && dias <= 0 && anos <= 0) {
-    document.getElementById("tempoRestante").innerText = 'Curso já concluído';
-}
-if (anoFormatura - anoAtual <= 0) {
-    document.getElementById("tempoRestante").innerText = '-';
-} else if (anoFormatura - anoAtual === 1) {
-    document.getElementById("tempoRestante").innerText = `Tempo restante: ${anoFormatura - anoAtual} ano`;
-} else {
-    document.getElementById("tempoRestante").innerText = `Tempo restante: ${anoFormatura - anoAtual} anos`;
+// AJUSTE DOS MESES
+if (meses < 0) {
+  meses += 12;
+  anos--;
 }
 
-document.getElementById("meuNome").innerText = NOME;
-document.getElementById("tituloProfissional").innerText = tituloProfissional;
+// CONSOLE
+console.log(botao);
+console.log(typeof anoFormatura);
+console.log(typeof minhaBio);
+console.log(typeof tituloProfissional);
+console.log(typeof nome);
+
+// HTML
+document.getElementById("meuNome").innerText = nome;
+document.getElementById("títuloProfissional").innerText = tituloProfissional;
 document.getElementById("minhaBio").innerText = minhaBio;
-document.getElementById("anoFormatura").innerText = "Ano de formatura: " + anoFormatura;
-document.write(`<p> Ano de Ingresso: ${anoIngresso}</p>`);
 
-let diaSemana = hoje.getDay() + 1;
+document.getElementById("anoFormatura").innerText =
+  `Ano de formatura: ${anoFormatura}`;
 
-let diaescrito;
+// TEMPO RESTANTE
+if (anos <= 0 && meses <= 0 && dias <= 0) {
+
+  document.getElementById("temporRestante").innerText =
+    "Curso Concluído";
+
+} else {
+
+  document.getElementById("temporRestante").innerText =
+    `Faltam ${anos} ano(s), ${meses} mês(es) e ${dias} dia(s)`;
+}
+
+// DIA DA SEMANA
+let diaSemana = hoje.getDay();
+let diaEscrito = "";
 
 switch (diaSemana) {
-    case 1: diaescrito = "Segunda-feira"; break;
-    case 2: diaescrito = "Terça-feira"; break; 
-    case 3: diaescrito = "Quarta-feira"; break;
-    case 4: diaescrito = "Quinta-feira"; break;
-    case 5: diaescrito = "Sexta-feira"; break;
-    case 6: diaescrito = "Sábado"; break;
-    case 7: diaescrito = "Domingo"; break;
-    default: diaescrito = "Dia inválido"; 
 
+  case 0:
+    diaEscrito = "Domingo";
+    break;
+
+  case 1:
+    diaEscrito = "Segunda-feira";
+    break;
+
+  case 2:
+    diaEscrito = "Terça-feira";
+    break;
+
+  case 3:
+    diaEscrito = "Quarta-feira";
+    break;
+
+  case 4:
+    diaEscrito = "Quinta-feira";
+    break;
+
+  case 5:
+    diaEscrito = "Sexta-feira";
+    break;
+
+  case 6:
+    diaEscrito = "Sábado";
+    break;
+
+  default:
+    diaEscrito = "Dia inválido";
 }
 
-document.write(`<p> Hoje é ${diaescrito} </p>`);
+document.write(`<p>Hoje é: ${diaEscrito}</p>`);
 
+// QUIZ
 const btnVisual = document.getElementById("btn-visual");
 const btnLogica = document.getElementById("btn-logica");
-const resultadoQuiz  = document.getElementById("resultado-quiz");
+const resultadoQuiz = document.getElementById("resultado-quiz");
 
-btnVisual.addEventListener("click", function() {
-  
+btnVisual.addEventListener("click", function () {
+
   resultadoQuiz.innerHTML = `
     <strong>🎨 Você tem perfil Front-End!</strong><br>
-    Você curte criar interfaces, trabalhar com cores, layouts e a experiência do usuário.
-    Tecnologias pra você: HTML, CSS, React, Vue.
+    Tecnologias: HTML, CSS, React, Vue.
   `;
-  resultadoQuiz.style.backgroundColor = "#e8f4fd";
-  resultadoQuiz.style.padding          = "12px";
-  resultadoQuiz.style.borderRadius     = "8px";
-  resultadoQuiz.style.marginTop        = "10px";
 });
 
-btnLogica.addEventListener("click", function() {
-  
+btnLogica.addEventListener("click", function () {
+
   resultadoQuiz.innerHTML = `
     <strong>⚙️ Você tem perfil Back-End!</strong><br>
-    Você curte resolver problemas complexos, trabalhar com dados e fazer a mágica acontecer nos bastidores.
-    Tecnologias pra você: Node.js, Python, bancos de dados.
+    Tecnologias: Node.js, Python, SQL.
   `;
-  resultadoQuiz.style.backgroundColor = "#e8f8f0";
-  resultadoQuiz.style.padding          = "12px";
-  resultadoQuiz.style.borderRadius     = "8px";
-  resultadoQuiz.style.marginTop        = "10px";
 });
 
-let pontosFront  = 0;
-let pontosBack   = 0;
+// PROJETOS
+let projetos = [
 
-btnVisual.addEventListener("click", function() {
-  pontosFront++;
-  exibirPerfil();
-});
+  {
+    nome: "Aplicação de Estacionamento",
+    tecnologias: ["Python", "Tkinter", "fpdf"],
+    conhecimento: ["VSCode", "GitHub", "pip"]
+  },
 
-btnLogica.addEventListener("click", function() {
-  pontosBack++;
-  exibirPerfil();
-});
+  {
+    nome: "Aplicação de Caixa Eletrônico",
+    tecnologias: ["Java", "SQL"]
+  }
+];
 
-function exibirPerfil() {
-  if (pontosFront > pontosBack) {
-    resultadoQuiz.textContent = "🎨 Perfil Front-End!";
-  } else if (pontosBack > pontosFront) {
-    resultadoQuiz.textContent = "⚙️ Perfil Back-End!";
-  } else {
-    resultadoQuiz.textContent = "Os dois né";
+// FUNÇÃO
+function mostrarProjetos() {
+
+  for (let projeto of projetos) {
+
+    let titulo = document.createElement("h2");
+    titulo.textContent = projeto.nome;
+
+    document.body.appendChild(titulo);
+
+    let lista = document.createElement("ul");
+
+    for (let tecnologia of projeto.tecnologias) {
+
+      let item = document.createElement("li");
+
+      item.textContent = tecnologia;
+
+      lista.appendChild(item);
+    }
+
+    document.body.appendChild(lista);
   }
 }
 
-/*for (let i = 0; i <= 20; i++) {
-    let pares = ( i % 2 ===0) ? "par" : "impar";
-    console.log (`${i} - ${pares}`)
-}*/
+// CHAMAR FUNÇÃO
+mostrarProjetos();
 
-let habilidades = ["HTML", "CSS", "JavaScript", "Python" ];
-
-for (let habilidade of habilidades) {
-    
-    if (habilidade === "JavaScript" || habilidade === "Python" || habilidade === "HTML" || habilidade === "CSS") {
-        document.write(`<p>${habilidade} ;  Hard skills </p>`);
-     else (document.write(`<p>${habilidade} ;  Soft skills </p>`));
-    
-}
-
-    

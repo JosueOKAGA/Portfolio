@@ -1,14 +1,41 @@
 'use strict';
 
-// BOTÃO
+// =========================
+// BOTÃO MODO CLARO/ESCURO
+// =========================
+
 const botao = document.getElementById("modoClaroEscuro");
 
-// DADOS PESSOAIS
-const nome = "Josué Felipe";
-let tituloProfissional = "Desenvolvedor de Sistemas";
-let minhaBio = "Sou um aluno de DS pronto para aprender a cada dia";
+botao.addEventListener("click", function () {
 
+  document.body.classList.toggle("modo-claro");
+
+  if (document.body.classList.contains("modo-claro")) {
+
+    botao.innerText = "🌙 Modo Escuro";
+
+  } else {
+
+    botao.innerText = "☀️ Modo Claro";
+  }
+});
+
+// =========================
+// DADOS PESSOAIS
+// =========================
+
+const nome = "Josué Felipe";
+
+let tituloProfissional =
+  "Desenvolvedor de Sistemas";
+
+let minhaBio =
+  "Sou um aluno de DS pronto para aprender a cada dia.";
+
+// =========================
 // DATAS
+// =========================
+
 let anoFormatura = 2026;
 let mesFormatura = 12;
 let diaFormatura = 31;
@@ -19,46 +46,59 @@ let anoAtual = hoje.getFullYear();
 let mesAtual = hoje.getMonth() + 1;
 let diaAtual = hoje.getDate();
 
+// =========================
 // CÁLCULO DE TEMPO
+// =========================
+
 let anos = anoFormatura - anoAtual;
 let meses = mesFormatura - mesAtual;
 let dias = diaFormatura - diaAtual;
 
 // AJUSTE DOS MESES
+
 if (meses < 0) {
+
   meses += 12;
   anos--;
 }
 
-// CONSOLE
-console.log(botao);
-console.log(typeof anoFormatura);
-console.log(typeof minhaBio);
-console.log(typeof tituloProfissional);
-console.log(typeof nome);
+// =========================
+// MOSTRAR DADOS NO HTML
+// =========================
 
-// HTML
-document.getElementById("meuNome").innerText = nome;
-document.getElementById("títuloProfissional").innerText = tituloProfissional;
-document.getElementById("minhaBio").innerText = minhaBio;
+document.getElementById("meuNome").innerText =
+  nome;
+
+document.getElementById("tituloProfissional").innerText =
+  tituloProfissional;
+
+document.getElementById("minhaBio").innerText =
+  minhaBio;
 
 document.getElementById("anoFormatura").innerText =
   `Ano de formatura: ${anoFormatura}`;
 
+// =========================
 // TEMPO RESTANTE
+// =========================
+
 if (anos <= 0 && meses <= 0 && dias <= 0) {
 
-  document.getElementById("temporRestante").innerText =
-    "Curso Concluído";
+  document.getElementById("tempoRestante").innerText =
+    "✅ Curso concluído!";
 
 } else {
 
-  document.getElementById("temporRestante").innerText =
-    `Faltam ${anos} ano(s), ${meses} mês(es) e ${dias} dia(s)`;
+  document.getElementById("tempoRestante").innerText =
+    `⏳ Faltam ${anos} ano(s), ${meses} mês(es) e ${dias} dia(s).`;
 }
 
+// =========================
 // DIA DA SEMANA
+// =========================
+
 let diaSemana = hoje.getDay();
+
 let diaEscrito = "";
 
 switch (diaSemana) {
@@ -95,18 +135,27 @@ switch (diaSemana) {
     diaEscrito = "Dia inválido";
 }
 
-document.write(`<p>Hoje é: ${diaEscrito}</p>`);
+document.getElementById("diaSemana").innerText =
+  `📅 Hoje é: ${diaEscrito}`;
 
+// =========================
 // QUIZ
-const btnVisual = document.getElementById("btn-visual");
-const btnLogica = document.getElementById("btn-logica");
-const resultadoQuiz = document.getElementById("resultado-quiz");
+// =========================
+
+const btnVisual =
+  document.getElementById("btn-visual");
+
+const btnLogica =
+  document.getElementById("btn-logica");
+
+const resultadoQuiz =
+  document.getElementById("resultado-quiz");
 
 btnVisual.addEventListener("click", function () {
 
   resultadoQuiz.innerHTML = `
     <strong>🎨 Você tem perfil Front-End!</strong><br>
-    Tecnologias: HTML, CSS, React, Vue.
+    Tecnologias: HTML, CSS, React.
   `;
 });
 
@@ -118,46 +167,144 @@ btnLogica.addEventListener("click", function () {
   `;
 });
 
+// =========================
+// LINGUAGEM FAVORITA
+// =========================
+
+const linguagem =
+  document.getElementById("linguagem");
+
+const btnLinguagem =
+  document.getElementById("btnLinguagem");
+
+const resultadoLinguagem =
+  document.getElementById("resultadoLinguagem");
+
+btnLinguagem.addEventListener("click", function () {
+
+  let valor = linguagem.value;
+
+  if (valor === "") {
+
+    resultadoLinguagem.innerText =
+      "⚠️ Escolha uma linguagem.";
+
+  } else if (valor === "Java") {
+
+    resultadoLinguagem.innerText =
+      "☕ Você gosta de Back-End robusto!";
+
+  } else if (valor === "Python") {
+
+    resultadoLinguagem.innerText =
+      "🐍 Você gosta de automação e IA!";
+
+  } else {
+
+    resultadoLinguagem.innerText =
+      "💻 Você gosta de desenvolvimento Web!";
+  }
+});
+
+// =========================
+// VALIDAÇÃO DE NOME
+// =========================
+
+const inputNome =
+  document.getElementById("inputNome");
+
+const btnValidar =
+  document.getElementById("btnValidar");
+
+const resultadoNome =
+  document.getElementById("resultadoNome");
+
+btnValidar.addEventListener("click", function () {
+
+  let nomeDigitado = inputNome.value;
+
+  if (nomeDigitado === "") {
+
+    resultadoNome.innerText =
+      "⚠️ Digite um nome.";
+
+  } else if (nomeDigitado.length < 3) {
+
+    resultadoNome.innerText =
+      "⚠️ Nome muito curto.";
+
+  } else if (!isNaN(nomeDigitado)) {
+
+    resultadoNome.innerText =
+      "⚠️ Nome inválido.";
+
+  } else {
+
+    resultadoNome.innerText =
+      `✅ Olá, ${nomeDigitado}!`;
+  }
+});
+
+// =========================
 // PROJETOS
+// =========================
+
 let projetos = [
 
   {
     nome: "Aplicação de Estacionamento",
-    tecnologias: ["Python", "Tkinter", "fpdf"],
-    conhecimento: ["VSCode", "GitHub", "pip"]
+
+    tecnologias: [
+      "Python",
+      "Tkinter",
+      "fpdf"
+    ]
   },
 
   {
     nome: "Aplicação de Caixa Eletrônico",
-    tecnologias: ["Java", "SQL"]
+
+    tecnologias: [
+      "Java",
+      "SQL"
+    ]
   }
 ];
 
-// FUNÇÃO
+// =========================
+// MOSTRAR PROJETOS
+// =========================
+
 function mostrarProjetos() {
+
+  const listaProjetos =
+    document.getElementById("listaProjetos");
 
   for (let projeto of projetos) {
 
-    let titulo = document.createElement("h2");
-    titulo.textContent = projeto.nome;
+    let titulo =
+      document.createElement("h3");
 
-    document.body.appendChild(titulo);
+    titulo.textContent =
+      `${projeto.nome} (${projeto.tecnologias.length} tecnologias)`;
 
-    let lista = document.createElement("ul");
+    listaProjetos.appendChild(titulo);
+
+    let lista =
+      document.createElement("ul");
 
     for (let tecnologia of projeto.tecnologias) {
 
-      let item = document.createElement("li");
+      let item =
+        document.createElement("li");
 
       item.textContent = tecnologia;
 
       lista.appendChild(item);
     }
 
-    document.body.appendChild(lista);
+    listaProjetos.appendChild(lista);
   }
 }
 
-// CHAMAR FUNÇÃO
 mostrarProjetos();
-

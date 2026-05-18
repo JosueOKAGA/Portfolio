@@ -1,40 +1,431 @@
-<!DOCTYPE html>
+   <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dev Josué Felipe</title>
-    <style src="/portfolio/styles/style.css"></style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Dev Josué Felipe</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/portfolio/styles/style.css">
+
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 20px;
+      background-color: #111;
+      color: white;
+      transition: 0.3s;
+    }
+
+    .modo-claro {
+      background-color: white;
+      color: black;
+    }
+
+    button {
+      margin: 5px;
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    section {
+      margin-top: 30px;
+      padding: 15px;
+      border: 1px solid gray;
+      border-radius: 10px;
+    }
+
+    input, select {
+      padding: 8px;
+      margin-top: 10px;
+    }
+  </style>
 </head>
+
 <body>
-    <main>
-        <button id="modoClaroEscuro">Modo Claro</button> 
-        <H1 id="meuNome"></H1>
-        <H2 id="títuloProfissional"></H2>
-        <p id="minhaBio"></p>
-        <p id="anoFormatura"></p>
-        <P id="temporRestante"></P>
 
-        <section id="quiz">
-            <h2>Descubra seu perfil dev</h2>
-            <p>Você prefere trabalhar com...</p>
+  <main>
 
-            <button id="btn-visual">🎨 Visual e design</button>
-            <button id="btn-logica">⚙️ Lógica e dados</button>
+    <!-- BOTÃO -->
+    <button id="modoClaroEscuro">🌙 Modo Claro</button>
 
-            
-            <div id="resultado-quiz"></div>
+    <!-- DADOS -->
+    <h1 id="meuNome"></h1>
+    <h2 id="tituloProfissional"></h2>
+    <p id="minhaBio"></p>
+    <p id="anoFormatura"></p>
+    <p id="tempoRestante"></p>
+    <p id="diaSemana"></p>
 
-             <p>Você prefere...</p>
+    <!-- QUIZ -->
+    <section id="quiz">
 
-             <button id="btn-visual">☕ JAVA</button>
-            <button id="btn-logica">💻 PHYTON</button>
-             
+      <h2>Descubra seu perfil dev</h2>
 
-        </section>
-    </main>    
+      <p>Você prefere trabalhar com...</p>
 
+      <button id="btn-visual">🎨 Visual e design</button>
+      <button id="btn-logica">⚙️ Lógica e dados</button>
 
- <script src="/portfolio/scripts/script.js"></script>   
+      <div id="resultado-quiz"></div>
+
+    </section>
+
+    <!-- LINGUAGEM -->
+    <section>
+
+      <h2>Qual linguagem você prefere?</h2>
+
+      <select id="linguagem">
+
+        <option value="">Escolha</option>
+        <option value="Java">Java</option>
+        <option value="Python">Python</option>
+        <option value="JavaScript">JavaScript</option>
+
+      </select>
+
+      <button id="btnLinguagem">Ver Perfil</button>
+
+      <p id="resultadoLinguagem"></p>
+
+    </section>
+
+    <!-- VALIDAÇÃO -->
+    <section>
+
+      <h2>Validação de Nome</h2>
+
+      <input type="text" id="inputNome" placeholder="Digite seu nome">
+
+      <button id="btnValidar">Validar</button>
+
+      <p id="resultadoNome"></p>
+
+    </section>
+
+    <!-- PROJETOS -->
+    <section>
+
+      <h2>Meus Projetos</h2>
+
+      <div id="listaProjetos"></div>
+
+    </section>
+
+  </main>
+
+  <script>
+
+    'use strict';
+
+    // =========================
+    // BOTÃO MODO CLARO/ESCURO
+    // =========================
+
+    const botao = document.getElementById("modoClaroEscuro");
+
+    botao.addEventListener("click", function () {
+
+      document.body.classList.toggle("modo-claro");
+
+      if (document.body.classList.contains("modo-claro")) {
+
+        botao.innerText = "🌙 Modo Escuro";
+
+      } else {
+
+        botao.innerText = "☀️ Modo Claro";
+      }
+    });
+
+    // =========================
+    // DADOS PESSOAIS
+    // =========================
+
+    const nome = "Josué Felipe";
+
+    let tituloProfissional = "Desenvolvedor de Sistemas";
+
+    let minhaBio =
+      "Sou um aluno de DS pronto para aprender a cada dia.";
+
+    // =========================
+    // DATAS
+    // =========================
+
+    let anoFormatura = 2026;
+    let mesFormatura = 12;
+    let diaFormatura = 31;
+
+    let hoje = new Date();
+
+    let anoAtual = hoje.getFullYear();
+    let mesAtual = hoje.getMonth() + 1;
+    let diaAtual = hoje.getDate();
+
+    // =========================
+    // CÁLCULO
+    // =========================
+
+    let anos = anoFormatura - anoAtual;
+    let meses = mesFormatura - mesAtual;
+    let dias = diaFormatura - diaAtual;
+
+    if (meses < 0) {
+
+      meses += 12;
+      anos--;
+    }
+
+    // =========================
+    // HTML
+    // =========================
+
+    document.getElementById("meuNome").innerText = nome;
+
+    document.getElementById("tituloProfissional").innerText =
+      tituloProfissional;
+
+    document.getElementById("minhaBio").innerText =
+      minhaBio;
+
+    document.getElementById("anoFormatura").innerText =
+      `Ano de formatura: ${anoFormatura}`;
+
+    // =========================
+    // TEMPO RESTANTE
+    // =========================
+
+    if (anos <= 0 && meses <= 0 && dias <= 0) {
+
+      document.getElementById("tempoRestante").innerText =
+        "✅ Curso concluído!";
+
+    } else {
+
+      document.getElementById("tempoRestante").innerText =
+        `⏳ Faltam ${anos} ano(s), ${meses} mês(es) e ${dias} dia(s).`;
+    }
+
+    // =========================
+    // DIA DA SEMANA
+    // =========================
+
+    let diaSemana = hoje.getDay();
+
+    let diaEscrito = "";
+
+    switch (diaSemana) {
+
+      case 0:
+        diaEscrito = "Domingo";
+        break;
+
+      case 1:
+        diaEscrito = "Segunda-feira";
+        break;
+
+      case 2:
+        diaEscrito = "Terça-feira";
+        break;
+
+      case 3:
+        diaEscrito = "Quarta-feira";
+        break;
+
+      case 4:
+        diaEscrito = "Quinta-feira";
+        break;
+
+      case 5:
+        diaEscrito = "Sexta-feira";
+        break;
+
+      case 6:
+        diaEscrito = "Sábado";
+        break;
+
+      default:
+        diaEscrito = "Dia inválido";
+    }
+
+    document.getElementById("diaSemana").innerText =
+      `📅 Hoje é: ${diaEscrito}`;
+
+    // =========================
+    // QUIZ
+    // =========================
+
+    const btnVisual =
+      document.getElementById("btn-visual");
+
+    const btnLogica =
+      document.getElementById("btn-logica");
+
+    const resultadoQuiz =
+      document.getElementById("resultado-quiz");
+
+    btnVisual.addEventListener("click", function () {
+
+      resultadoQuiz.innerHTML = `
+        <strong>🎨 Você tem perfil Front-End!</strong><br>
+        Tecnologias: HTML, CSS, React.
+      `;
+    });
+
+    btnLogica.addEventListener("click", function () {
+
+      resultadoQuiz.innerHTML = `
+        <strong>⚙️ Você tem perfil Back-End!</strong><br>
+        Tecnologias: Node.js, Python, SQL.
+      `;
+    });
+
+    // =========================
+    // LINGUAGEM FAVORITA
+    // =========================
+
+    const linguagem =
+      document.getElementById("linguagem");
+
+    const btnLinguagem =
+      document.getElementById("btnLinguagem");
+
+    const resultadoLinguagem =
+      document.getElementById("resultadoLinguagem");
+
+    btnLinguagem.addEventListener("click", function () {
+
+      let valor = linguagem.value;
+
+      if (valor === "") {
+
+        resultadoLinguagem.innerText =
+          "⚠️ Escolha uma linguagem.";
+
+      } else if (valor === "Java") {
+
+        resultadoLinguagem.innerText =
+          "☕ Você gosta de Back-End robusto!";
+
+      } else if (valor === "Python") {
+
+        resultadoLinguagem.innerText =
+          "🐍 Você gosta de automação e IA!";
+
+      } else {
+
+        resultadoLinguagem.innerText =
+          "💻 Você gosta de desenvolvimento Web!";
+      }
+    });
+
+    // =========================
+    // VALIDAÇÃO DE NOME
+    // =========================
+
+    const inputNome =
+      document.getElementById("inputNome");
+
+    const btnValidar =
+      document.getElementById("btnValidar");
+
+    const resultadoNome =
+      document.getElementById("resultadoNome");
+
+    btnValidar.addEventListener("click", function () {
+
+      let nomeDigitado = inputNome.value;
+
+      if (nomeDigitado === "") {
+
+        resultadoNome.innerText =
+          "⚠️ Digite um nome.";
+
+      } else if (nomeDigitado.length < 3) {
+
+        resultadoNome.innerText =
+          "⚠️ Nome muito curto.";
+
+      } else if (!isNaN(nomeDigitado)) {
+
+        resultadoNome.innerText =
+          "⚠️ Nome inválido.";
+
+      } else {
+
+        resultadoNome.innerText =
+          `✅ Olá, ${nomeDigitado}!`;
+      }
+    });
+
+    // =========================
+    // PROJETOS
+    // =========================
+
+    let projetos = [
+
+      {
+        nome: "Aplicação de Estacionamento",
+
+        tecnologias: [
+          "Python",
+          "Tkinter",
+          "fpdf"
+        ]
+      },
+
+      {
+        nome: "Aplicação de Caixa Eletrônico",
+
+        tecnologias: [
+          "Java",
+          "SQL"
+        ]
+      }
+    ];
+
+    // =========================
+    // MOSTRAR PROJETOS
+    // =========================
+
+    function mostrarProjetos() {
+
+      const listaProjetos =
+        document.getElementById("listaProjetos");
+
+      for (let projeto of projetos) {
+
+        let titulo =
+          document.createElement("h3");
+
+        titulo.textContent =
+          `${projeto.nome} (${projeto.tecnologias.length} tecnologias)`;
+
+        listaProjetos.appendChild(titulo);
+
+        let lista =
+          document.createElement("ul");
+
+        for (let tecnologia of projeto.tecnologias) {
+
+          let item =
+            document.createElement("li");
+
+          item.textContent = tecnologia;
+
+          lista.appendChild(item);
+        }
+
+        listaProjetos.appendChild(lista);
+      }
+    }
+
+    mostrarProjetos();
+
+  </script>
+
 </body>
 </html>
